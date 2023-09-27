@@ -2,8 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from '@/router/index'
 import store from '@/store/index'
-import Vuex from 'vuex';
-import userStore from './store/modules/userStore'
 import vuetify from '@/plugins/vuetify'
 // Vuetify-dialog
 import VuetifyDialog from 'vuetify-dialog'
@@ -32,7 +30,6 @@ Vue.component('Button', Button)
 new Vue({
 	router,
 	store,
-	userStore,
 	vuetify,
 	render: h => h(App),
 }).$mount('#app')

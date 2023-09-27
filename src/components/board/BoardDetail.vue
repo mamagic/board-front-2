@@ -46,7 +46,7 @@
 									:content="reply.writer"
 								/>
 							</td>
-							<td style="padding: 0;">{{ reply.content }}</td>
+							<td style="padding: 0;">{{ reply.contents }}</td>
 							<td style="width:140px; padding: 0;" v-if="!isMobile()">
 								{{ reply.regDttm }}
 							</td>
@@ -60,7 +60,7 @@
 							</td>
 							<td style="width:30px; padding: 0;">
 								<Button
-									@click="replyEdit(reply.replyNo, reply.content)"
+									@click="replyEdit(reply.replyNo, reply.contents)"
 									color="grey"
 									icon
 									xsmall
@@ -189,7 +189,8 @@ export default {
 			},
 		})
 			.then(response => {
-				this.replies = response.data
+				console.log(response.data.comments)
+				this.replies = response.data.comments
 			})
 			.catch(error => {
 				console.log(error)

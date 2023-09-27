@@ -82,8 +82,8 @@ export default {
           .then((res) => {
             if (res.status === 200) {
               console.log(res.data);
-              this.$store.commit('userStore/login', res.data.token);
-              this.$router.push('/home');
+              this.$store.commit("userStore/login", res.data.token);
+              this.$router.push("/home");
             }
           });
       } catch (error) {

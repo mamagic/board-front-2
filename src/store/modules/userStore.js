@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 const userStore = new Vuex.Store({
+    namespaced: true,
     state: {
         //userId: '',
         //userName: '',
@@ -12,6 +13,7 @@ const userStore = new Vuex.Store({
     },
     mutations: {
         login: function (state, token) {
+            console.log(token)
             //state.userId = payload.userId
             //state.userName = payload.userName
             state.token = token 
