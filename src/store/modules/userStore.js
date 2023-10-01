@@ -1,34 +1,41 @@
 import router from '@/router'
-import Vue from 'vue'
-import Vuex from 'vuex'
+import jwt from 'jsonwebtoken'
 
-Vue.use(Vuex);
+const state = {
+    userId: null,
+    token: null 
+}
 
-const userStore = new Vuex.Store({
-    namespaced: true,
-    state: {
-        //userId: '',
-        //userName: '',
-        token: null 
-    },
-    mutations: {
-        login: function (state, token) {
-            console.log(token)
-            //state.userId = payload.userId
-            //state.userName = payload.userName
-            state.token = token 
-        },
-        loginCheck: function (state) {
-            if (!state.token) {
-                router.push({
-                    name: 'login'
-                }).catch(error => {
-                    console.log(error)
-                })
+const mutations = {
+       login: function (state, token) {
+            try{
+                console.log(token) 
+                const decodedToken = jwt.decode(token, { complete: true})
+                state.userId = decodedToken.payload.sub
+                state.token = token 
+            } catch(error){
+                 console.error('JWT error : ', error)
             }
-        }
+            console.log(state.userId)
+       },
+       logout: function(state){
+            state.userId = null
+            state.token = null
+            router.push("/signIn");
+       },
+       loginCheck: function (state) {
+           if (!state.token) {
+               router.push({
+                   name: 'login'
+               }).catch(error => {
+                   console.log(error)
+               })
+           }
+       }
+}
 
-    }
-})
-
-export default userStore
+export default {
+    namespaced: true,
+    state,
+    mutations
+}

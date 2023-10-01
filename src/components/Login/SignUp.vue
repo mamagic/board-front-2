@@ -137,7 +137,7 @@ export default {
                       }
                       else{
                         alert("회원가입이 완료되었습니다. 로그인 화면으로 돌아갑니다")
-                        this.$router.push({path: './login'});
+                        this.$router.push('/signIn');
                       }
                       })
             .catch(error =>{
@@ -149,7 +149,7 @@ export default {
       }
         }},
         linkToLogin(){
-          this.$router.push({path:"./login"});
+          this.$router.push("/signIn");
         }
     }
 }

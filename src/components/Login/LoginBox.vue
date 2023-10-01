@@ -77,11 +77,11 @@ export default {
           .post("http://localhost:8081/login", JSON.stringify(saveData), {
             headers: {
               "Content-Type": `application/json`,
-            },
+            }
           })
           .then((res) => {
             if (res.status === 200) {
-              console.log(res.data);
+              console.log(res.data)
               this.$store.commit("userStore/login", res.data.token);
               this.$router.push("/home");
             }

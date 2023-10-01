@@ -39,6 +39,8 @@
 <script>
 import Editor from '@/components/common/Editor'
 import { insertBoardAPI } from '@/api/index'
+import { mapState } from 'vuex';
+
 export default {
 	components: {
 		Editor,
@@ -50,23 +52,25 @@ export default {
 		],
 		title: '',
 	}),
+	computed: {
+    ...mapState('userStore', ['userId']),
+	},
 	methods: {
 		async save() {
-			var content = this.$refs.editor.getContent()
-			var title = this.title
-
+			let content = this.$refs.editor.getContent()
+			let title = this.title
 			let res = await this.confirmDialog(
 				'Confirm Write',
 				'Do you want to save it?',
 			)
 			if (res) {
 				insertBoardAPI({
-					params: {
-						title: title,
-						content: content,
-					},
+					title: title,
+					writer: this.userId,
+					content: content,
 				})
 					.then(response => {
+						console.log(response)
 						if (response.data > 0) {
 							this.$store.commit('SET_SNACKBAR', {
 								show: true,

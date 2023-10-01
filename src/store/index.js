@@ -8,6 +8,7 @@ Vue.use(Vuex)
 export const SET_SNACKBAR = 'SET_SNACKBAR'
 
 export default new Vuex.Store({
+	namespaced: true,
 	state: {
 		sb: {
 			show: false,

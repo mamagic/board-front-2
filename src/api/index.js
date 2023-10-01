@@ -25,7 +25,10 @@ function getBoardDetailAPI(params) {
  * @param {*} params
  */
 function insertBoardAPI(params) {
-	return instance.post('/board/insert', null, params)
+	return instance.post('/board/insert',params,
+						{ headers: {
+							'Content-Type': 'application/json' 
+	  					}})
 }
 
 /**
@@ -33,7 +36,7 @@ function insertBoardAPI(params) {
  * @param {*} params
  */
 function updateBoardAPI(params) {
-	return instance.post('/board/update', null, params)
+	return instance.post('/board/update', params)
 }
 
 /**
@@ -41,7 +44,7 @@ function updateBoardAPI(params) {
  * @param {*} params
  */
 function deleteBoardAPI(params) {
-	return instance.post('/board/delete', null, params)
+	return instance.post('/board/delete',params)
 }
 
 /**
@@ -49,7 +52,7 @@ function deleteBoardAPI(params) {
  * @param {*} params
  */
 function insertReplyAPI(params) {
-	return instance.post('/board/reply/insert', null, params)
+	return instance.post('/board/reply/insert', params)
 }
 
 /**
@@ -65,7 +68,7 @@ function getReplyListAPI(params) {
  * @param {*} params
  */
 function updateReplyAPI(params) {
-	return instance.post('/board/reply/update', null, params)
+	return instance.post('/board/reply/update', params)
 }
 
 /**
@@ -73,7 +76,7 @@ function updateReplyAPI(params) {
  * @param {*} params
  */
 function deleteReplyAPI(params) {
-	return instance.post('/board/reply/delete', null, params)
+	return instance.post('/board/reply/delete', params)
 }
 
 export {

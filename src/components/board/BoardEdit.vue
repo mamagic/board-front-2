@@ -80,11 +80,9 @@ export default {
 			)
 			if (res) {
 				updateBoardAPI({
-					params: {
 						docNo: docNo,
 						title: title,
 						content: content,
-					},
 				})
 					.then(response => {
 						if (response.data > 0) {

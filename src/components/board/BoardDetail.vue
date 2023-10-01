@@ -138,6 +138,8 @@
 import Viewer from '@/components/common/Viewer'
 import Tooltip from '@/components/common/Tooltip'
 import btnMixins from '@/mixins/btnMixins'
+import { mapState } from 'vuex';
+
 import {
 	getBoardDetailAPI,
 	deleteBoardAPI,
@@ -196,6 +198,9 @@ export default {
 				console.log(error)
 			})
 	},
+	computed: {
+    ...mapState('userStore', ['userId']),
+	},
 	methods: {
 		async del() {
 			let res = await this.confirmDialog(
@@ -204,9 +209,7 @@ export default {
 			)
 			if (res) {
 				deleteBoardAPI({
-					params: {
-						docNo: this.docNo,
-					},
+					docNo: this.docNo
 				})
 					.then(response => {
 						if (response.data > 0) {
@@ -224,15 +227,16 @@ export default {
 			}
 		},
 		replySave() {
-			if (this.comment !== null) {
-				insertReplyAPI({
-					params: {
+			if (this.comment !== null && this.comment !== '') {
+				insertReplyAPI(
+					{
 						docNo: this.docNo,
-						comment: this.comment,
-					},
-				})
+						writer: this.userId,
+						comment: this.comment, 
+					}
+					)
 					.then(response => {
-						if (response.data > 0) {
+						if (response.data == 'ok') {
 							this.refresh()
 						}
 					})
@@ -245,11 +249,9 @@ export default {
 			let res = await this.promptDialog('Edit Reply', 'Comment', comment)
 			if (res) {
 				updateReplyAPI({
-					params: {
 						replyNo: replyNo,
 						docNo: this.docNo,
 						comment: res,
-					},
 				})
 					.then(response => {
 						if (response.data > 0) {
@@ -268,10 +270,8 @@ export default {
 			)
 			if (res) {
 				deleteReplyAPI({
-					params: {
 						replyNo: replyNo,
-						docNo: this.docNo,
-					},
+						docNo: this.docNo
 				})
 					.then(response => {
 						if (response.data > 0) {
