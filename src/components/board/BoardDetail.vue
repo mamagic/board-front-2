@@ -212,7 +212,7 @@ export default {
 					docNo: this.docNo
 				})
 					.then(response => {
-						if (response.data > 0) {
+						if (response.data == 'ok') {
 							this.$store.commit('SET_SNACKBAR', {
 								show: true,
 								msg: 'Delete Complete',
@@ -254,7 +254,7 @@ export default {
 						comment: res,
 				})
 					.then(response => {
-						if (response.data > 0) {
+						if (response.data == 'ok') {
 							this.refresh()
 						}
 					})
@@ -274,7 +274,7 @@ export default {
 						docNo: this.docNo
 				})
 					.then(response => {
-						if (response.data > 0) {
+						if (response.data == 'ok') {
 							this.refresh()
 						}
 					})
@@ -286,5 +286,9 @@ export default {
 	},
 }
 </script>
-
-<style></style>
+<style>
+.image-container {
+  height: 300px;
+  overflow: hidden;
+}
+</style>

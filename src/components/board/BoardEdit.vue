@@ -85,7 +85,7 @@ export default {
 						content: content,
 				})
 					.then(response => {
-						if (response.data > 0) {
+						if (response.data == 'ok') {
 							this.$store.commit('SET_SNACKBAR', {
 								show: true,
 								msg: 'Edit Complete',

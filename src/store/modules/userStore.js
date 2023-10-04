@@ -13,6 +13,7 @@ const mutations = {
                 const decodedToken = jwt.decode(token, { complete: true})
                 state.userId = decodedToken.payload.sub
                 state.token = token 
+
             } catch(error){
                  console.error('JWT error : ', error)
             }
@@ -21,6 +22,7 @@ const mutations = {
        logout: function(state){
             state.userId = null
             state.token = null
+
             router.push("/signIn");
        },
        loginCheck: function (state) {

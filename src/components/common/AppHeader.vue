@@ -36,6 +36,7 @@ export default {
     ...mapState('userStore', ['userId']),
     signInLabel() {
       // userId 상태에 따라 버튼 레이블을 동적으로 설정
+      //return this.userId ? 'logout' : 'signIn';
       return this.userId ? 'logout' : 'signIn';
     },
 	signInButtonStyle() {
