@@ -1,8 +1,30 @@
 import axios from 'axios'
+import Vue from 'vue'
+import userStore from '../store/modules/userStore';
 
 const instance = axios.create({
 	baseURL: 'http://localhost:8081/',
 })
+
+Vue.prototype.$axios = instance;
+
+instance.interceptors.request.use(
+	(config) => {
+	  const data = JSON.parse(localStorage.getItem('vuex'));
+	  const token = data.userStore.token;
+
+	  console.log(token);
+
+	  if (token) {
+		config.headers['Authorization'] = `Bearer ${token}`;
+	  }
+  
+	  return config;
+	},
+	(error) => {
+	  return Promise.reject(error);
+	}
+  );
 
 /**
  * 게시글 목록 조회

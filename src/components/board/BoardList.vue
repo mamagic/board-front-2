@@ -145,6 +145,8 @@ export default {
 				const { sortBy, sortDesc, page, itemsPerPage } = this.options
 				let sort = []
 
+				console.log(sortBy);
+
 				if (sortBy.length > 0) {
 					// eslint-disable-next-line
 					sortBy.forEach((value, index) => {

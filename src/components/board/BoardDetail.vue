@@ -27,7 +27,7 @@
 					</v-col>
 				</v-row>
 				Content<br />
-				<div style="height:300px;"><Viewer ref="viewer" /><br /></div>
+				<div style="max-height: 500px; overflow-y: auto;"><Viewer ref="viewer" /><br /></div>
 				Reply ({{ replyCount }})<br />
 				<v-simple-table dense>
 					<tbody>
