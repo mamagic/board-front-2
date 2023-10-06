@@ -100,7 +100,7 @@ export default {
 			totalCount: 0,
 			loading: false,
 			conditions: [
-				{ text: '글 번호', value: 'docNo' },
+				{ text: '글 내용', value: 'content' },
 				{ text: '제목', value: 'title' },
 				{ text: '작성자', value: 'writer' },
 			],
@@ -153,15 +153,14 @@ export default {
 						sort.push(
 							value
 								.replace(/[A-Z]/g, function(str) {
-									return '_' + str[0]
+									return str[0]
 								})
-								.toUpperCase() +
-								' ' +
+								 + ' ' +
 								(sortDesc[index] ? 'desc' : 'asc'),
 						)
 					})
 				} else {
-					sort.push('DOC_NO desc')
+					sort.push('docNo desc')
 				}
 
 				let items = this.getBoardDataFromAPI(page, itemsPerPage, sort).then(

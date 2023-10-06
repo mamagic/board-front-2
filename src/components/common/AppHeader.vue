@@ -10,7 +10,10 @@
 			<span class="mr-2">{{ signInLabel }}</span>
 		</v-btn>
 		<v-btn @click="movePage('/signUp')" text>
-			<span class="mr-2">signUp</span>
+			<span class="mr-2">SignUp</span>
+		</v-btn>
+		<v-btn @click="movePage('/upload')" text>
+			<span class="mr-2">FileUPDown</span>
 		</v-btn>
 		<v-spacer></v-spacer>
 		<div v-if="userId" class="mr-2 white--text">{{ userId }}</div>
