@@ -42,7 +42,7 @@ const routes = [
 			import('../views/Login/SignUpView.vue'),
 	},
 	{
-		path: '/upload',
+		path: '/upLoad',
 		name: 'UpLoad',
 		component: () =>
 			import('../views/file/UpLoadView.vue'),

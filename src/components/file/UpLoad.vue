@@ -1,19 +1,50 @@
 <template>
-    <div class="card">
-        <Toast />
-        <FileUpload name="demo[]" url="" @upload="onAdvancedUpload($event)" :multiple="true" accept="image/*" :maxFileSize="1000000">
-            <template #empty>
-                <p>Drag and drop files to here to upload.</p>
-            </template>
-        </FileUpload>
-    </div>
-</template>
-
-<script setup>
-import { useToast } from "primevue/usetoast";
-const toast = useToast();
-
-const onAdvancedUpload = () => {
-    toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
-};
-</script>
+    <v-app>
+      <v-btn raised class="primary" @click="onPickFile">Upload</v-btn>
+          <input
+            type="file"
+            style="display: none"
+            ref="fileInput"
+            accept="*"
+            @change="onFilePicked"
+            required
+          >
+    </v-app>
+  </template>
+  
+  <script>
+  import { uploadFile } from './url'
+  export default {
+    methods: {
+      onPickFile () {
+         this.$refs.fileInput.click()
+      },
+      onUploadFile (file) {
+        let formData = new FormData()
+        formData.append('file', file[0])
+        uploadFile(formData)
+          .then(() => {
+            this.onLoadFiles()
+          })
+          .catch(error => {
+            /* eslint-disable no-console */
+            console.log(error)
+          })
+      },
+      onFilePicked (event) {
+        const files = event.target.files // file info load
+  
+        let filename = files[0].name
+        if (filename.lastIndexOf('.') <= 0) {
+          return alert('Please pick valid file')
+        }
+        const fileReader = new FileReader()
+        fileReader.addEventListener('load', () => {
+          this.imageUrl = fileReader.result
+        })
+        fileReader.readAsDataURL(files[0])
+        this.onUploadFile(files)
+      }
+    }
+  }
+  </script>
