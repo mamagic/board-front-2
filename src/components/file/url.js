@@ -1,6 +1,6 @@
 export function uploadFile(formData) {
 	return formRequest({
-		url: 'localhost:8081'+ '/file/uploadFile',
+		url: 'http://localhost:8081'+ '/file/uploadFile',
 		method: 'POST',
 		body: formData
 	})
@@ -17,7 +17,13 @@ function formRequest(options) {
           if (xhr.status === 200) {
             resolve(xhr.responseText);
           } else {
-            reject(new Error(`Request failed with status: ${xhr.status}`));
+            if (xhr.status === 401) {
+              resolve(xhr.responseText); // 다른 상태 코드는 성공으로 처리
+              //reject(new Error(`Unauthorized: ${xhr.status}`));
+              // 여기에서 401 오류를 처리하고 사용자에게 알림을 보여줄 수 있습니다.
+            } else {
+              resolve(xhr.responseText); // 다른 상태 코드는 성공으로 처리
+            }
           }
         }
       };
